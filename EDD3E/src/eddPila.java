@@ -1,74 +1,51 @@
 public class eddPila {
 
+    nodoPila ultimo; 
+    int tamaño; 
 
-    //Declarar 
-    nodoPila cima, fondo; 
-    int contador = 0; 
+    //Constructor
+    public eddPila() {
+        this.ultimo = null;
+        this.tamaño = 0;
+    }
 
-    //Constructor 
-    public eddPila(){
+    //Métodos
 
-        this.cima = null; 
-        this.fondo = null; 
+    public boolean pilaVacia(){
+        return ultimo == null; 
+    }//pilavacia
 
-    }//fin constructor
-
-
-    //Metodos - Operaciones 
-    public void push(int dato){   
-        contador++;      
-        nodoPila nodo = new nodoPila(dato); 
-
-        if(contador == 0){
-
-            cima = nodo; 
-            fondo = cima; 
-
-        }else {
-
-            nodo.siguiente = cima; 
-            cima = nodo; 
-
-        }//
-
-
-    }//fin push
-
-    public void pop(){
-        contador--; 
-        if(contador == 1){
-
-            cima = null; 
-            fondo = cima; 
-
-        }else{
-
-            cima = cima.siguiente; 
-        }//
-
-    }//fin pop 
-
-    public boolean stackEmpty(){
-        return fondo == null; 
+    public void push(int dato){
+        nodoPila nodo = new nodoPila(dato);
+        nodo.siguiente = ultimo;
+        ultimo = nodo;
+        tamaño++;
     }//
 
-    public void stackFull(){
-
+    public int pop(){
+        int tmp = ultimo.dato;
+        ultimo = ultimo.siguiente;
+        tamaño--;
+        return tmp;
     }//
 
-    public void stackClear(){
+
+    public int tamPila(){
         
+        return tamaño;
+
     }//
 
-    public int stackCima(){
-        return cima.dato; 
+    public void limpiarPila(){
+
+        while(!pilaVacia()){
+            pop();
+        }//
     }//
 
-    public int stackSize(){
-        return  contador; 
-    }//fin size
-
-
+    public int ultimoElemento(){
+        return ultimo.dato; 
+    }//
 
 
 }//fin clase
